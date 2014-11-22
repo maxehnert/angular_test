@@ -1,8 +1,7 @@
-
 (function () {
 
-
-  var app = angular.module('HolidayList', ['ngRoute', 'restangular']);
+  var app = angular.module('HolidayList', ['ngRoute', 'restangular' //'formFor'
+  ]);
 
   app.config( function ($routeProvider, RestangularProvider) {
 
@@ -11,35 +10,37 @@
     $routeProvider.when('/', {
       templateUrl: 'templates/home-template.html',
       controller: 'GiftsController'
-    });
-
-    $routeProvider.when('/single/:id', {
+    })
+    .when('/single/:id', {
       templateUrl: 'templates/single-template.html',
       controller: 'GiftsController'
-    });
-
-    $routeProvider.when('/add', {
+    })
+    .when('/add', {
       templateUrl: 'templates/add-template.html',
       controller: 'GiftsController'
-    });
-
-    //adding in the user login url
-    $routeProvider.when('/login', {
+    })
+    .when('/login', {
       templateUrl: 'templates/user-template.html',
       controller: 'UserController'
     });
 
+    //form url
+    // $routeProvider.when('/form', {
+    //   templateUrl: 'templates/form-template.html',
+    //   controller: 'SimpleFormDemoController'
+    // });
+
   });
 
-  app.directive('clickTurkey', function () {
-    return {
-      link: function ($scope, element, attrs) {
-        element.bind('click', function () {
-          console.log('my turkey directive was run');
-        });
-      }
-    }
-  });
+  // app.directive('clickTurkey', function () {
+  //   return {
+  //     link: function ($scope, element, attrs) {
+  //       element.bind('click', function () {
+  //         console.log('my turkey directive was run');
+  //       });
+  //     }
+  //   }
+  // });
 
   app.directive('zip', function(){
     return {
@@ -59,6 +60,11 @@
     }
   });
 
+  $('.link').on('click', function(){
+    console.log('test');
+    $destroy();
+  });
+
 }());
 
 
@@ -66,7 +72,7 @@
 
   angular.module('HolidayList')
     .controller('GiftsController',
-      ['giftsFactory', '$scope', '$location', '$rootScope',
+      ['giftsFactory', '$scope', '$location', '$scope',
         function (giftsFactory, $scope, $location, $rootScope) {
 
         giftsFactory.getGifts().then( function (results) {
@@ -102,6 +108,49 @@
 }());
 
 (function(){
+
+angular.module('HolidayList').controller('SimpleFormDemoController', ['formFactory', '$scope', '$location', '$rootScope',
+  function(FormForConfiguration,formFactory, $scope,  flashr, $location, $rootScope) {
+    FormForConfiguration.enableAutoLabels();
+
+    $scope.formData = {};
+
+    $scope.validationFailed = function() {
+      flashr.now.error('Your form is invalid');
+    };
+
+    $scope.validationRules = {
+      iAgreeToTheTermsOfService: {
+        required: {
+          rule: true,
+          message: 'You must accept the TOS'
+        }
+      },
+      email: {
+        required: true,
+        pattern: /\w+@\w+\.\w+/
+      },
+      password: {
+        required: true,
+        pattern: {
+          rule: /[0-9]/,
+          message: 'Your password must contain at least 1 number'
+        }
+      }
+    };
+
+    $scope.submit = function(data) {
+      formFactory.addForm(data);
+      $rootScope.$on('submit:data', function(){
+        $location.path('/');
+      });
+      flashr.now.info('Your form has been submitted');
+    };
+}]);
+
+}());
+
+(function(){
   angular.module('HolidayList').factory('userFactory', ['$rootScope', 'Restangular', function($rootScope, Restangular){
     //server end-point
     var userBase = Restangular.all('max-holiday');
@@ -115,12 +164,14 @@
       });
     }
 
+
     return {
     getUser: getUser,
-    addUSer: addUser
+    addUser: addUser
     };
 
   }]);
+
 }());
 
 (function () {
@@ -159,5 +210,24 @@
       };
 
     }]);
+
+}());
+
+(function(){
+  angular.module('HolidayList').factory('userFactory', ['$rootScope', 'Restangular', function($rootScope, Restangular){
+    //server end-point
+    var userBase = Restangular.all('max-holiday');
+
+    function submit(data){
+      userBase.post(id).then( function (){
+        $rootScope.$broadcast('submit:data');
+      });
+    }
+
+    return {
+    submit: submit
+    };
+
+  }]);
 
 }());
