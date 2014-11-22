@@ -1,5 +1,6 @@
 <ul>
+  <li ng-repeat='id in user'>username: {{user.name}}</li>
   <li ng-repeat="gift in gifts">
-    {{ gift.name }} is budgeted for {{ gift.budget }}
+     <br /> <a class='link' href="#"> {{ gift.name }} is budgeted for {{ gift.budget }}</a>
   </li>
 </ul>

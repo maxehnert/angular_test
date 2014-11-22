@@ -20,16 +20,21 @@
       <nav>
         <a href="#/">Home</a> |
         <a href="#/add">Add</a> |
-        <a href="#/login">Login</a>
+        <a href="#/login">Login</a> |
+        <a href="#/form">Form link</a>
       </nav>
 
       <div ng-view></div>
+
+
       <br/>
       <input type="text" ng-model='model.title'>
       <input type="text" ng-model='model.content'>
 
       <zip title='{{model.title}}'>This is the: {{model.content}}</zip>
     </div>
+
+
 
     <script src="scripts/vendor.js"></script>
 

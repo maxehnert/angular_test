@@ -1,3 +1,3 @@
-## Yo, I'm a Readme
+## Experimenting with Angular
 
-You should probably update me so people looking at your code have an idea what it is being used for :)
+This is the first project using angular. Just trying different things out.

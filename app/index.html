@@ -28,16 +28,21 @@
       <nav>
         <a href="#/">Home</a> |
         <a href="#/add">Add</a> |
-        <a href="#/login">Login</a>
+        <a href="#/login">Login</a> |
+        <a href="#/form">Form link</a>
       </nav>
 
       <div ng-view></div>
+
+
       <br/>
       <input type="text" ng-model='model.title'>
       <input type="text" ng-model='model.content'>
 
       <zip title='{{model.title}}'>This is the: {{model.content}}</zip>
     </div>
+
+
 
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
@@ -46,6 +51,7 @@
     <script src="../bower_components/angular/angular.min.js"></script>
 <script src="../bower_components/angular-route/angular-route.min.js"></script>
     <script src="../bower_components/restangular/dist/restangular.min.js"></script>
+<!-- <script src="../bower_components/angular-form-for/dist/form-for.min.js"></script> -->
 
 
     <!-- endbower -->
@@ -55,8 +61,11 @@
         <script src="scripts/main.js"></script>
         <script src="scripts/controllers/gifts_controller.js"></script>
         <script src="scripts/controllers/user_controller.js"></script>
-        <script src="scripts/userFactory.js"></script>
+<!--         <script src="scripts/controllers/form_controller.js"></script>
+ -->        <script src="scripts/userFactory.js"></script>
         <script src="scripts/giftsFactory.js"></script>
+<!--         <script src="scripts/formFactory.js"></script>
+ -->
         <!-- endbuild -->
 </body>
 </html>

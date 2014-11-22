@@ -3,19 +3,14 @@
     //server end-point
     var userBase = Restangular.all('max-holiday');
 
-    function getUser(){
-      return userBase.getList();
-    }
-    function addUser(id){
+    function submit(data){
       userBase.post(id).then( function (){
-        $rootScope.$broadcast('user:added');
+        $rootScope.$broadcast('submit:data');
       });
     }
 
-
     return {
-    getUser: getUser,
-    addUser: addUser
+    submit: submit
     };
 
   }]);

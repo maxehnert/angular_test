@@ -3,7 +3,7 @@
 
   angular.module('HolidayList')
     .controller('GiftsController',
-      ['giftsFactory', '$scope', '$location', '$rootScope',
+      ['giftsFactory', '$scope', '$location', '$scope',
         function (giftsFactory, $scope, $location, $rootScope) {
 
         giftsFactory.getGifts().then( function (results) {

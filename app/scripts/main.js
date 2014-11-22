@@ -1,8 +1,7 @@
-
 (function () {
 
-
-  var app = angular.module('HolidayList', ['ngRoute', 'restangular']);
+  var app = angular.module('HolidayList', ['ngRoute', 'restangular' //'formFor'
+  ]);
 
   app.config( function ($routeProvider, RestangularProvider) {
 
@@ -11,35 +10,37 @@
     $routeProvider.when('/', {
       templateUrl: 'templates/home-template.html',
       controller: 'GiftsController'
-    });
-
-    $routeProvider.when('/single/:id', {
+    })
+    .when('/single/:id', {
       templateUrl: 'templates/single-template.html',
       controller: 'GiftsController'
-    });
-
-    $routeProvider.when('/add', {
+    })
+    .when('/add', {
       templateUrl: 'templates/add-template.html',
       controller: 'GiftsController'
-    });
-
-    //adding in the user login url
-    $routeProvider.when('/login', {
+    })
+    .when('/login', {
       templateUrl: 'templates/user-template.html',
       controller: 'UserController'
     });
 
+    //form url
+    // $routeProvider.when('/form', {
+    //   templateUrl: 'templates/form-template.html',
+    //   controller: 'SimpleFormDemoController'
+    // });
+
   });
 
-  app.directive('clickTurkey', function () {
-    return {
-      link: function ($scope, element, attrs) {
-        element.bind('click', function () {
-          console.log('my turkey directive was run');
-        });
-      }
-    }
-  });
+  // app.directive('clickTurkey', function () {
+  //   return {
+  //     link: function ($scope, element, attrs) {
+  //       element.bind('click', function () {
+  //         console.log('my turkey directive was run');
+  //       });
+  //     }
+  //   }
+  // });
 
   app.directive('zip', function(){
     return {
@@ -57,6 +58,11 @@
         }
       }
     }
+  });
+
+  $('.link').on('click', function(){
+    console.log('test');
+    $destroy();
   });
 
 }());
